@@ -166,7 +166,6 @@ class Main_TicTacToc : PTocol_GameStatus {
                     MaxiumValue2 = 0
                     
                 }
-//                if i
             }
         }
     }
