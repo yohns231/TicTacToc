@@ -1,3 +1,8 @@
+/*
+ *version : a_1_0_1
+ *update : 20240103_1650
+ *update : Func_CheckWin 간략화
+ */
 
 import Foundation
 
@@ -105,66 +110,90 @@ class Main_TicTacToc : PTocol_GameStatus {
         Var_CurrentPlayer = List_PlayerList[Int_PlayerIndex]
     }
     
-    func Func_CheckWin(){
-        var value1 = List_ViewPointer[0][0] as! String
-        var value2 = List_ViewPointer[0][0] as! String
-        var value3 = List_ViewPointer[0][0] as! String
-        var value4 = List_ViewPointer[0][0] as! String
-        var value5 = List_ViewPointer[0][0] as! String
-        var value6 = List_ViewPointer[0][0] as! String
-        let Int_GridSize = Int(sqrt(Double(Int_GameArea))) - 1
-        var MaxiumValue1 : Int = 0
-        var MaxiumValue2 : Int = 0
-        var MaxiumValue3 : Int = 0
+//    func Func_CheckWin(){
+//        var value1 = List_ViewPointer[0][0] as! String
+//        var value2 = List_ViewPointer[0][0] as! String
+//        var value3 = List_ViewPointer[0][0] as! String
+//        var value4 = List_ViewPointer[0][0] as! String
+//        var value5 = List_ViewPointer[0][0] as! String
+//        var value6 = List_ViewPointer[0][0] as! String
+//        let Int_GridSize = Int(sqrt(Double(Int_GameArea))) - 1
+//        var MaxiumValue1 : Int = 0
+//        var MaxiumValue2 : Int = 0
+//        var MaxiumValue3 : Int = 0
+//        
+//        for i in 0...Int_GridSize{
+//            for j in 0...Int_GridSize{
+//                value2 = List_ViewPointer[i][j] as! String
+//                value4 = List_ViewPointer[j][i] as! String
+//                value6 = List_ViewPointer[j][i] as! String
+//                if i == j && value5 == value6{
+//                    value5 = value6
+//                    MaxiumValue3 += 1
+//                    if MaxiumValue3 == Int_GridSize + 1{
+//                        MaxiumValue3 = 0
+//                        print("win")
+//                        Func_quit()
+//                        break
+//                    }
+//                }
+//                
+//                if value1 == value2{
+//                    value1 = value2
+//                    MaxiumValue1 += 1
+//                    if MaxiumValue1 == Int_GridSize + 1{
+//                        MaxiumValue1 = 0
+//                        print("win")
+//                        Func_quit()
+//                        break
+//                    }
+//                }
+//                else {
+//                    value1 = List_ViewPointer[0][0] as! String
+//                    value2 = List_ViewPointer[0][0] as! String
+//                    MaxiumValue1 = 0
+//                    
+//                }
+//                    
+//                if value3 == value4{
+//                    value3 = value4
+//                    MaxiumValue2 += 1
+//                    if MaxiumValue2 == Int_GridSize + 1{
+//                        MaxiumValue2 = 0
+//                        print("win")
+//                        Func_quit()
+//                        break
+//                    }
+//                }
+//                else {
+//                    value3 = List_ViewPointer[0][0] as! String
+//                    value4 = List_ViewPointer[0][0] as! String
+//                    MaxiumValue2 = 0
+//                    
+//                }
+//            }
+//        }
+//    }
+    func Func_CheckWin() {
+        let Int_GridSize = Int(sqrt(Double(Int_GameArea)))
+        var MaxRow = Array(repeating: 0, count: Int_GridSize)
+        var MaxCol = Array(repeating: 0, count: Int_GridSize)
+        var MaxDiag1 = 0
+        var MaxDiag2 = 0
         
-        for i in 0...Int_GridSize{
-            for j in 0...Int_GridSize{
-                value2 = List_ViewPointer[i][j] as! String
-                value4 = List_ViewPointer[j][i] as! String
-                value6 = List_ViewPointer[j][i] as! String
-                if i == j && value5 == value6{
-                    value5 = value6
-                    MaxiumValue3 += 1
-                    if MaxiumValue3 == Int_GridSize + 1{
-                        MaxiumValue3 = 0
-                        print("win")
-                        Func_quit()
-                        break
-                    }
-                }
+        for i in 0..<Int_GridSize {
+            for j in 0..<Int_GridSize {
+                guard let current = List_ViewPointer[i][j] as? String else { continue }
                 
-                if value1 == value2{
-                    value1 = value2
-                    MaxiumValue1 += 1
-                    if MaxiumValue1 == Int_GridSize + 1{
-                        MaxiumValue1 = 0
-                        print("win")
-                        Func_quit()
-                        break
-                    }
-                }
-                else {
-                    value1 = List_ViewPointer[0][0] as! String
-                    value2 = List_ViewPointer[0][0] as! String
-                    MaxiumValue1 = 0
-                    
-                }
-                    
-                if value3 == value4{
-                    value3 = value4
-                    MaxiumValue2 += 1
-                    if MaxiumValue2 == Int_GridSize + 1{
-                        MaxiumValue2 = 0
-                        print("win")
-                        Func_quit()
-                        break
-                    }
-                }
-                else {
-                    value3 = List_ViewPointer[0][0] as! String
-                    value4 = List_ViewPointer[0][0] as! String
-                    MaxiumValue2 = 0
-                    
+                if current == List_ViewPointer[i][0] as? String { MaxRow[i] += 1 }
+                if current == List_ViewPointer[0][j] as? String { MaxCol[j] += 1 }
+                if i == j, current == List_ViewPointer[0][0] as? String { MaxDiag1 += 1 }
+                if i + j == Int_GridSize - 1, current == List_ViewPointer[0][Int_GridSize - 1] as? String { MaxDiag2 += 1 }
+                
+                if MaxRow[i] == Int_GridSize || MaxCol[j] == Int_GridSize || MaxDiag1 == Int_GridSize || MaxDiag2 == Int_GridSize {
+                    print("Player wins!")
+                    Func_quit()
+                    return
                 }
             }
         }
