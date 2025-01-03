@@ -1,7 +1,7 @@
 /*
  *version : a_1_0_1
  *update : 20240103_1650
- *update : Func_CheckWin 간략화
+ *update : Func_CheckWin minmumize
  */
 
 import Foundation
