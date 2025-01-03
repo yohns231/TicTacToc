@@ -12,7 +12,6 @@
 
  - Just input number
  
- 
 **Tech Stack**
  
  - Language : Swift
@@ -34,7 +33,3 @@
 3. Select Map Size
 
 4. Play this game
-
-
-
-
