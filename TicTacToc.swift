@@ -1,7 +1,7 @@
 /*
  *version : a_1_0_1
  *update : 20240103_1650
- *update : Func_CheckWin minmumize
+ *update : Func_CheckWin minmumized
  */
 
 import Foundation
