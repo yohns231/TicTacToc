@@ -170,7 +170,6 @@ class Main_TicTacToc : PTocol_GameStatus {
             }
         }
     }
-    
     func Func_quit(){
         Status_Game = false
     }
